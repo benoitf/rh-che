@@ -11,6 +11,7 @@
 package org.eclipse.che.api.deploy;
 
 import com.google.inject.AbstractModule;
+import com.google.inject.multibindings.MapBinder;
 import com.google.inject.multibindings.Multibinder;
 import com.google.inject.name.Names;
 import com.redhat.bayesian.agent.BayesianAgent;
@@ -19,6 +20,7 @@ import com.redhat.che.keycloak.token.provider.contoller.TokenController;
 import com.redhat.che.keycloak.token.provider.oauth.OpenShiftGitHubOAuthAuthenticator;
 
 import org.eclipse.che.security.oauth.OAuthAuthenticator;
+import org.eclipse.che.api.agent.GitCredentialsAgent;
 import org.eclipse.che.api.agent.LSCSharpAgent;
 import org.eclipse.che.api.agent.LSJsonAgent;
 import org.eclipse.che.api.agent.LSPhpAgent;
@@ -39,10 +41,12 @@ import org.eclipse.che.api.factory.server.FactoryAcceptValidator;
 import org.eclipse.che.api.factory.server.FactoryCreateValidator;
 import org.eclipse.che.api.factory.server.FactoryEditValidator;
 import org.eclipse.che.api.factory.server.FactoryParametersResolver;
+import org.eclipse.che.api.machine.server.recipe.RecipeLoader;
 import org.eclipse.che.api.machine.shared.Constants;
 import org.eclipse.che.api.user.server.TokenValidator;
 import org.eclipse.che.api.workspace.server.WorkspaceConfigMessageBodyAdapter;
 import org.eclipse.che.api.workspace.server.WorkspaceMessageBodyAdapter;
+import org.eclipse.che.api.workspace.server.stack.StackLoader;
 import org.eclipse.che.api.workspace.server.stack.StackMessageBodyAdapter;
 import org.eclipse.che.core.db.schema.SchemaInitializer;
 import org.eclipse.che.inject.DynaModule;
