@@ -16,10 +16,8 @@ import com.google.inject.multibindings.Multibinder;
 import com.google.inject.name.Names;
 import com.redhat.bayesian.agent.BayesianAgent;
 import com.redhat.che.keycloak.server.KeycloakHttpJsonRequestFactory;
-import com.redhat.che.keycloak.token.provider.contoller.TokenController;
 import com.redhat.che.keycloak.token.provider.oauth.OpenShiftGitHubOAuthAuthenticator;
 
-import org.eclipse.che.security.oauth.OAuthAuthenticator;
 import org.eclipse.che.api.agent.GitCredentialsAgent;
 import org.eclipse.che.api.agent.LSCSharpAgent;
 import org.eclipse.che.api.agent.LSJsonAgent;
@@ -51,6 +49,8 @@ import org.eclipse.che.api.workspace.server.stack.StackMessageBodyAdapter;
 import org.eclipse.che.core.db.schema.SchemaInitializer;
 import org.eclipse.che.inject.DynaModule;
 import org.eclipse.che.plugin.github.factory.resolver.GithubFactoryParametersResolver;
+import org.eclipse.che.plugin.openshift.client.OpenShiftCommandAppender;
+import org.eclipse.che.security.oauth.OAuthAuthenticator;
 import org.flywaydb.core.internal.util.PlaceholderReplacer;
 
 import javax.sql.DataSource;
@@ -234,5 +234,10 @@ public class WsMasterModule extends AbstractModule {
 
         Multibinder<OAuthAuthenticator> oAuthAuthenticators = Multibinder.newSetBinder(binder(), OAuthAuthenticator.class);
         oAuthAuthenticators.addBinding().to(OpenShiftGitHubOAuthAuthenticator.class);
+
+        Multibinder<OpenShiftCommandAppender> openShiftCommandAppenders =
+                Multibinder.newSetBinder(binder(), OpenShiftCommandAppender.class);
+        openShiftCommandAppenders.addBinding().to(OpenShiftBayesianLogCommandAppender.class);
+
     }
 }
