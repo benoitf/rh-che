@@ -26,6 +26,6 @@ public class OpenShiftBayesianLogCommandAppender implements OpenShiftCommandAppe
      */
     @Override
     public String getCommand() {
-        return "echo \'   - ls-bayesian logs can be found in /home/user/che/bayesian.log\'";
+        return "echo \'   - ls-bayesian logs can be found in /home/user/che/ls-bayesian/bayesian.log\'";
     }
 }
